@@ -125,44 +125,29 @@ print('Force (bruteforce trapezoidal calculation using r sampling), Force (prope
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.semilogx(r,f_s(r),'-',linewidth=1)
-plt.semilogx(r, vec_f_ns(r),'--',linewidth=1)
-plt.semilogx(r, (4*np.log(r)+2)/np.pi/(1+r**2)**2,'-.',linewidth=1)
-plt.semilogx(r, -(4*np.log(r)+2)/np.pi/(1+r**2)**2,'-.',linewidth=1)
-plt.xlabel('$r^*$', fontsize=24)
-plt.ylabel('$f^*$', fontsize=24)
-plt.savefig('fpart.eps', format='eps', dpi=400,bbox_inches = 'tight')
-
-
-plt.figure()
-
-plt.semilogx(r,f_s_withoutsing(r),'-',linewidth=1)
-#plt.semilogx(r, vec_f_ns(r)-(4*np.log(r)+2)/np.pi/(1+r**2)**2,'--',linewidth=1)
-plt.semilogx(r, vec_f_ns_withoutsing(r),'--',linewidth=1)
-plt.xlabel('$r^*$', fontsize=24)
-plt.ylabel('$f^*$', fontsize=24)
-plt.savefig('fpart_without_sing.eps', format='eps', dpi=400,bbox_inches = 'tight')
-
 
 shearDavis = np.loadtxt("davis_shear.csv")
 
 plt.figure()
 plt.xlabel('$r^*$', fontsize=24)
 plt.ylabel('$f^*$', fontsize=24)
-plt.plot(r,-f_s(r)-vec_f_ns(r),'-',linewidth=1)
-plt.plot(shearDavis[:,0]/2**0.5,shearDavis[:,1]*2,'o',linewidth=1)
+plt.plot(r,-f_s(r)-vec_f_ns(r),'-',linewidth=1, label='BIM')
+plt.plot(shearDavis[:,0]/2**0.5,shearDavis[:,1]*2,'o',linewidth=1,label='Davis et al. (1989)')
 plt.xlim(0,4)
-plt.ylim(0,2)
+plt.legend()
 plt.savefig('f.eps', format='eps', dpi=400,bbox_inches = 'tight')
 
 
 plt.figure()
 
 pressureDavis = np.loadtxt("davis_pressure.csv")
-plt.plot(r,pressure)
-plt.plot(pressureDavis[:,0]/2**0.5,pressureDavis[:,1]*2**0.5,'o',linewidth=1)
+
+plt.plot(r,pressure, label='BIM')
+plt.plot(pressureDavis[:,0]/2**0.5,pressureDavis[:,1]*2**0.5,'o',linewidth=1, label='Davis et al. (1989)')
 plt.xlabel('$r^*$', fontsize=24)
 plt.ylabel('$p^*$', fontsize=24)
+plt.xlim(0,4)
+plt.legend()
 plt.savefig('pressure.eps', format='eps', dpi=400,bbox_inches = 'tight')
 
 

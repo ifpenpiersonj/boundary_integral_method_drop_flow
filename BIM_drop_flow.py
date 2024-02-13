@@ -135,7 +135,7 @@ plt.plot(r,-f_s(r)-vec_f_ns(r),'-',linewidth=1, label='BIM')
 plt.plot(shearDavis[:,0]/2**0.5,shearDavis[:,1]*2,'o',linewidth=1,label='Davis et al. (1989)')
 plt.xlim(0,4)
 plt.legend()
-plt.savefig('f.eps', format='eps', dpi=400,bbox_inches = 'tight')
+plt.savefig('f.pdf', format='pdf', dpi=400,bbox_inches = 'tight')
 
 
 plt.figure()
@@ -148,7 +148,7 @@ plt.xlabel('$r^*$', fontsize=24)
 plt.ylabel('$p^*$', fontsize=24)
 plt.xlim(0,4)
 plt.legend()
-plt.savefig('pressure.eps', format='eps', dpi=400,bbox_inches = 'tight')
+plt.savefig('pressure.pdf', format='pdf', dpi=400,bbox_inches = 'tight')
 
 
 

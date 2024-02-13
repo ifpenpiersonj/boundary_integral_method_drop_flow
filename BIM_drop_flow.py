@@ -112,10 +112,10 @@ def integrand_F(r):
 vec_integrand_F = np.vectorize(integrand_F)
 
 
-Force_trap=np.trapz(2*np.pi*(f_s(r)+vec_f_ns(r))*r**2/(1+r**2), r)
+#Force_trap=np.trapz(2*np.pi*(f_s(r)+vec_f_ns(r))*r**2/(1+r**2), r)
 Force = quad(integrand_F,0.9e-3,np.inf,epsabs=eps)
 
-print('Force (bruteforce trapezoidal calculation using r sampling), Force (proper integration), error',Force_trap,Force[0],Force[1])
+print('Force, error',Force[0]*2**0.5,Force[1])
 
 
 

@@ -39,6 +39,7 @@ def singularity(r,R):
 ######### Dimensionless quantities ###################
 ######################################################
 
+
 def h(R):
   return 1 + R**2
 
@@ -83,14 +84,14 @@ vec_f_ns_withoutsing = np.vectorize(f_ns_withoutsing)
 
 
 ###################################################################################
-######### Calculations of the pressure within the film p = -2 \int f/h dr  ########
+######### Calculations of the pressure within the film p = 2 \int f/h dr  ########
 ###################################################################################
 
 def p_s_withoutsing(r):
-  return 2*(2*r**2+np.pi*r**3+3*np.pi*r)/(np.pi*(1+r**2)**2)/(1+r**2)
+  return -2*(2*r**2+np.pi*r**3+3*np.pi*r)/(np.pi*(1+r**2)**2)/(1+r**2)
 
 def p_ns_withoutsing(r):
-  return -2*(quad(integrand, 0, np.inf, args=(r),epsabs=eps)[0]-(4*np.log(r)+2)/np.pi/(1+r**2)**2)/(1+r**2)
+  return 2*(quad(integrand, 0, np.inf, args=(r),epsabs=eps)[0]-(4*np.log(r)+2)/np.pi/(1+r**2)**2)/(1+r**2)
 
 def p(r):
   return p_s_withoutsing(r)+p_ns_withoutsing(r)
@@ -131,8 +132,8 @@ shearDavis = np.loadtxt("davis_shear.csv")
 plt.figure()
 plt.xlabel('$r^*$', fontsize=24)
 plt.ylabel('$f^*$', fontsize=24)
-plt.plot(r,-f_s(r)-vec_f_ns(r),'-',linewidth=1, label='BIM')
-plt.plot(shearDavis[:,0]/2**0.5,shearDavis[:,1]*2,'o',linewidth=1,label='Davis et al. (1989)')
+plt.plot(r,f_s(r)+vec_f_ns(r),'-',linewidth=1, label='BIM')
+plt.plot(shearDavis[:,0]/2**0.5,-shearDavis[:,1]*2,'o',linewidth=1,label='Davis et al. (1989)')
 plt.xlim(0,4)
 plt.legend()
 plt.savefig('f.pdf', format='pdf', dpi=400,bbox_inches = 'tight')
@@ -143,7 +144,7 @@ plt.figure()
 pressureDavis = np.loadtxt("davis_pressure.csv")
 
 plt.plot(r,pressure, label='BIM')
-plt.plot(pressureDavis[:,0]/2**0.5,pressureDavis[:,1]*2**0.5,'o',linewidth=1, label='Davis et al. (1989)')
+plt.plot(pressureDavis[:,0]/2**0.5,-pressureDavis[:,1]*2**0.5,'o',linewidth=1, label='Davis et al. (1989)')
 plt.xlabel('$r^*$', fontsize=24)
 plt.ylabel('$p^*$', fontsize=24)
 plt.xlim(0,4)
